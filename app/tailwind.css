@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  :root {
+    /* @shadcn/ui */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+ 
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+ 
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+ 
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+ 
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+ 
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+ 
+    --radius: 0.5rem;
+
+    /* custom */
+    --color-sapphire-50: 243 243 252;
+    --color-sapphire-100: 226 228 248;
+    --color-sapphire-200: 200 207 244;
+    --color-sapphire-300: 163 180 235;
+    --color-sapphire-400: 122 149 225;
+    --color-sapphire-500: 91 122 215;
+    --color-sapphire-600: 69 100 201;
+    --color-sapphire-700: 60 89 185;
+    --color-sapphire-800: 59 86 165;
+    --color-sapphire-900: 48 72 120;
+    --color-sapphire-950: 33 47 74;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-size: 20px;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
