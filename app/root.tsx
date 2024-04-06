@@ -1,4 +1,4 @@
-import type { LinksFunction } from '@remix-run/cloudflare';
+import type { LinksFunction } from '@remix-run/cloudflare'
 import {
   Link,
   Links,
@@ -6,8 +6,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
-import styles from "~/tailwind.css?url"
+} from '@remix-run/react'
+import styles from '~/tailwind.css?url'
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
@@ -53,9 +53,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
+  )
 }
 
 export default function App() {
-  return <Outlet />;
+  return <Outlet />
 }
