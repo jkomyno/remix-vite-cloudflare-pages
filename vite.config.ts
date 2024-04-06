@@ -6,5 +6,13 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [remixCloudflareDevProxy(), remix(), tsconfigPaths()],
+  plugins: [
+    remixCloudflareDevProxy(),
+    remix({
+      future: {
+        unstable_singleFetch: true,
+      }
+    }),
+    tsconfigPaths(),
+  ],
 });
