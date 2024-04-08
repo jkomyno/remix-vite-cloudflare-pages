@@ -6,6 +6,7 @@
   "scripts": {
     "build": "remix vite:build",
     "deploy": "pnpm run build && wrangler pages deploy ./build/client",
+    "env": "dotenv -e .dev.vars",
     "dev": "remix vite:dev",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "wrangler pages dev ./build/client",
@@ -15,6 +16,9 @@
     "build-cf-types": "wrangler types"
   },
   "dependencies": {
+    "@libsql/client": "^0.6.0",
+    "@prisma/adapter-libsql": "^5.12.1",
+    "@prisma/client": "^5.12.1",
     "@radix-ui/react-slot": "^1.0.2",
     "@remix-run/cloudflare": "2.9.0-pre.3",
     "@remix-run/cloudflare-pages": "2.9.0-pre.3",
@@ -34,6 +38,7 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
+    "dotenv-cli": "^7.4.1",
     "eslint": "^8.38.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.28.1",
@@ -41,8 +46,10 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "node-fetch": "^3.3.2",
+    "prisma": "^5.12.1",
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.7.2",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1",
@@ -50,5 +57,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "prisma": {
+    "seed": "node --import tsx/esm ./prisma/seed.ts"
   }
 }
