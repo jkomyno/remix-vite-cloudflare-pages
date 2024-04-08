@@ -15,13 +15,17 @@
     "build-cf-types": "wrangler types"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "@remix-run/cloudflare": "2.9.0-pre.3",
     "@remix-run/cloudflare-pages": "2.9.0-pre.3",
     "@remix-run/react": "2.9.0-pre.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "isbot": "^4.1.0",
     "miniflare": "^3.20231030.4",
     "react": "19.0.0-canary-e3ebcd54b-20240405",
-    "react-dom": "19.0.0-canary-e3ebcd54b-20240405"
+    "react-dom": "19.0.0-canary-e3ebcd54b-20240405",
+    "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
