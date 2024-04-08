@@ -80,8 +80,6 @@ export default function Survey({ children: errorBoundary }: { children: React.Re
   )
   const { choices, submissions } = useTypedLoaderData<typeof loader>()
   const fetcher = useFetcher<typeof action>()
-  const actionResult = fetcher.data
-  console.log('actionResult', actionResult)
 
   const isSubmitting = fetcher.state === 'submitting'
     && fetcher.formData?.get('_action') === 'submit'
