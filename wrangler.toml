@@ -1,6 +1,11 @@
 name = "remix-vite-cloudflare-pages"
 compatibility_date = "2024-04-05"
 
+[[d1_databases]]
+binding = "D1_DATABASE" # i.e. available in your Worker on env.DB
+database_name = "showandtell"
+database_id = "fbdc5a8b-6e47-49e6-b522-7d8af9172392"
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#environment-variables

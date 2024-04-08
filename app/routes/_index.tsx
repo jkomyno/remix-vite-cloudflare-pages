@@ -1,56 +1,60 @@
 import { useRef } from 'react'
 import { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/cloudflare'
+import { useFetcher } from '@remix-run/react'
 import { Button } from '~/components/ui/button'
 import { useTypedLoaderData } from '~/hooks'
-import { useFetcher } from '@remix-run/react'
+import { getPrisma } from '~/lib/prisma.server'
 
 export const meta = () => {
   return [{ title: 'Prisma Driver Adapters - QA' }]
 }
 
-const choices = [
-  {
-    label: 'PostgreSQL',
-    value: 'postgres',
-  },
-  {
-    label: 'PlanetScale',
-    value: 'planetscale',
-  },
-  {
-    label: 'Turso (LibSQL)',
-    value: 'libsql',
-  },
-  {
-    label: 'Neon',
-    value: 'neon',
-  },
-] as const
-
-const submissions = [] as Array<{ database: typeof choices[number], createdAt: Date }>
-
 // The `loader` function block runs on the server and client.
 // You can use it to fetch data on the server before the page is rendered.
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ context }: LoaderFunctionArgs) {
+  const prisma = getPrisma(context.cloudflare.env)
+
+  const choices = await prisma.database.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+  })
+
+  const submissions = await prisma.survey.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    select: {
+      id: true,
+      database: true,
+      createdAt: true,
+    }
+  })
+  
   return { choices, submissions }
 }
 
 // The `action` function responds to form submissions.
-export async function action({ request, response }: ActionFunctionArgs) {
+export async function action({ context, request, response }: ActionFunctionArgs) {
   const formData = await request.formData()
   const databaseValue = String(formData.get('database') || '')
-  const databaseLabel = choices.find((choice) => choice.value === databaseValue)?.label
-
-  const database = {
-    value: databaseValue,
-    label: databaseLabel,
-  } as typeof choices[number]
 
   try {
-    const data = { database, createdAt: new Date() }
-    submissions.unshift(data)
+    const prisma = getPrisma(context.cloudflare.env)
+    const { database } = await prisma.survey.create({
+      data: {
+        database: {
+          connect: {
+            value: databaseValue,
+          },
+        },
+      },
+      select: {
+        database: true,
+      }
+    })
 
-    return { ok: true, errors: null, data } as const
+    return { ok: true, errors: null, data: database } as const
   } catch (_) {
     const dbError = `We're currently having issues connecting to our database. Please try again later.`
 
